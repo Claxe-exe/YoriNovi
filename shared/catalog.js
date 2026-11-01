@@ -1,0 +1,36 @@
+// Categories, topics and sources are independent registries. Only this module knows anime.
+export const categories = [{ id: 'anime', name: 'Anime', description: 'Resmî yapım ve yayın duyuruları', enabled: true }];
+export const newsTypes = [
+  { id: 'project', name: 'Yeni proje / devam', description: 'Yeni sezon, film veya devam projesi onayı' },
+  { id: 'release', name: 'Yayın tarihi', description: 'Duyurulan yayın günü, ayı veya yılı' },
+  { id: 'trailer', name: 'Resmî fragman', description: 'PV, teaser ve fragman yayımlanması' },
+];
+export const topics = [
+  { id: 'lycoris', name: 'Lycoris Recoil', aliases: ['リコリス・リコイル', 'Lycoris Recoil'], tier: 'established', color: '#a77479' },
+  { id: 'bocchi', name: 'Bocchi the Rock!', aliases: ['ぼっち・ざ・ろっく', 'BOCCHI THE ROCK'], tier: 'established', color: '#a281a7' },
+  { id: 'rezero', name: 'Re:ZERO', aliases: ['Re:ゼロ', 'Re:ZERO', 'リゼロ'], tier: 'established', color: '#868db7' },
+  { id: 'demonslayer', name: 'Demon Slayer', aliases: ['鬼滅の刃', 'Demon Slayer'], tier: 'established', color: '#719287' },
+  { id: 'onepiece', name: 'One Piece', aliases: ['ONE PIECE', 'ワンピース'], tier: 'established', color: '#829da9' },
+  { id: 'dragonball', name: 'Dragon Ball', aliases: ['DRAGON BALL', 'ドラゴンボール'], tier: 'established', color: '#b89b6b' },
+  { id: 'college-noir', name: 'Le Collège Noir', aliases: ['COLLÈGE NOIR', 'COLLEGE NOIR'], tier: 'discovery', color: '#8a91a0' },
+  { id: 'oshinoko', name: 'Oshi no Ko', aliases: ['推しの子', 'OSHI NO KO'], tier: 'established', color: '#a278bb' },
+  { id: 'chainsawman', name: 'Chainsaw Man', aliases: ['チェンソーマン', 'CHAINSAW MAN'], tier: 'established', color: '#ad7691' },
+  { id: 'eightysix', name: '86 Eighty-Six', aliases: ['エイティシックス', 'EIGHTY SIX', 'EIGHTY-SIX'], tier: 'established', color: '#7c85ba' },
+].map(t => ({ ...t, categoryId: 'anime' }));
+export const sources = [
+  { id: 'lycoris-official', name: 'Lycoris Recoil · Resmî site', url: 'https://lycoris-recoil.com/news/', adapter: 'aniplex', topicId: 'lycoris', pages: 3, detail: '.p-news_detail__text, .p-news_detail__body, .p-news__detail', official: true },
+  { id: 'bocchi-official', name: 'Bocchi the Rock! · Resmî site', url: 'https://bocchi.rocks/omnibus/news/', adapter: 'bocchi', topicId: 'bocchi', pages: 2, detail: '.detail__body', official: true },
+  { id: 'rezero-official', name: 'Re:ZERO · Resmî site', url: 'https://re-zero-anime.jp/tv/news/', adapter: 'rezero', topicId: 'rezero', pages: 1, detail: '.news-detail, .news-body', official: true },
+  { id: 'kimetsu-official', name: 'Demon Slayer · Resmî site', url: 'https://kimetsu.com/anime/news/', adapter: 'kimetsu', topicId: 'demonslayer', pages: 2, detail: '.news_detail, .news_detail__text', official: true },
+  { id: 'toei-rss', name: 'Toei Animation Europe · RSS', url: 'https://www.toei-animation.com/feed/', adapter: 'rss', pages: 1, official: true },
+  { id: 'oshinoko-official', name: 'Oshi no Ko · Resmî site', url: 'https://ichigoproduction.com/Season3/news/', adapter: 'html', selectors: ['#news_block tr', '.title', '.day'], topicId: 'oshinoko', pages: 1, detail: '#news_block', official: true },
+  { id: 'chainsawman-official', name: 'Chainsaw Man · Resmî site', url: 'https://chainsawman.dog/news/', adapter: 'html', selectors: ['.p-news__item', '.p-news__txt', '.p-news__date'], topicId: 'chainsawman', pages: 1, detail: '.p-news__detail--content', official: true },
+  { id: 'eightysix-official', name: '86 Eighty-Six · Resmî site', url: 'https://anime-86.com/news/', adapter: 'html', selectors: ['.c-list__item', '.c-list__item-title', '.c-list__item-date'], topicId: 'eightysix', pages: 3, detail: '.p-news__detail, .c-article__body', official: true },
+].map(s => ({ ...s, categoryId: 'anime' }));
+export const unavailableSources = [
+  { name: 'SPY×FAMILY · Resmî site', url: 'https://spy-family.net/news/', reason: 'Doğrudan kontrol HTTP 403 / bot doğrulaması döndürdü. Etkin değil.' },
+  { name: 'Frieren · Resmî site', url: 'https://frieren-anime.jp/news/', reason: 'Erişim denemesi HTTP 403 / bot doğrulaması döndürdü. Etkin değil.' },
+  { name: 'Jujutsu Kaisen · Resmî site', url: 'https://jujutsukaisen.jp/news/', reason: 'Erişim denemesi HTTP 403 / bot doğrulaması döndürdü. Etkin değil.' },
+  { name: 'X', url: 'https://docs.x.com/x-api/getting-started/pricing', reason: 'Geliştirici hesabı, sunucu erişim anahtarı ve kullanıma göre ücretli API gerekiyor. Bağlı değil.' },
+];
+export const defaultState = () => ({ categories: ['anime'], favorites: [], scope: 'established', types: ['project', 'release', 'trailer'], notifications: false, quietEnabled: true, quietStart: '23:00', quietEnd: '08:00', timezone: 'Europe/Istanbul', theme: 'system' });

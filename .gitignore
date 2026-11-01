@@ -1,0 +1,16 @@
+node_modules/
+dist/
+data/
+.env
+credentials/
+*.log
+android/.gradle/
+android/local.properties
+android/**/build/
+android/app/google-services.json
+*-inspect.html
+artifacts/
+.android-build/
+*.jks
+*.keystore
+legacy/
